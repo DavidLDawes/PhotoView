@@ -1,7 +1,7 @@
 # PhotoView
 PhotoView aims to help produce an easily usable implementation of a zooming Android ImageView.
 
-[![](https://jitpack.io/v/chrisbanes/PhotoView.svg)](https://jitpack.io/#chrisbanes/PhotoView)
+[![](https://jitpack.io/v/DavidLDawes/PhotoView.svg)](https://jitpack.io/#DavidLDawes/PhotoView)
 
 [![](https://user-images.githubusercontent.com/12352397/85141529-94648e80-b24f-11ea-9a14-a845fb43b181.gif)
 
