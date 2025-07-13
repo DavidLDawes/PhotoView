@@ -13,13 +13,14 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-package com.github.chrisbanes.photoview.sample;
+package com.github.DavidLDawes.photoview.sample;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
 
-import com.github.chrisbanes.photoview.PhotoView;
+import com.github.DavidLDawes.photoview.PhotoView;
+import com.github.DavidLDawes.sample.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -33,32 +34,32 @@ public class RotationSampleActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rotation_sample);
+        setContentView(com.github.DavidLDawes.sample.R.layout.activity_rotation_sample);
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.rotation);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_rotate_10_right:
-                        photo.setRotationBy(10);
-                        return true;
-                    case R.id.action_rotate_10_left:
+                int selId = item.getItemId();
+                if (selId == R.id.action_rotate_10_right) {
+                    photo.setRotationBy(10);
+                    return true;
+                } else if (selId == R.id.action_rotate_10_left) {
                         photo.setRotationBy(-10);
                         return true;
-                    case R.id.action_toggle_automatic_rotation:
+                } else if (selId == R.id.action_toggle_automatic_rotation) {
                         toggleRotation();
                         return true;
-                    case R.id.action_reset_to_0:
-                        photo.setRotationTo(0);
-                        return true;
-                    case R.id.action_reset_to_90:
+                } else if (selId == R.id.action_reset_to_0) {
+                    photo.setRotationTo(0);
+                    return true;
+                } else if (selId == R.id.action_reset_to_90) {
                         photo.setRotationTo(90);
                         return true;
-                    case R.id.action_reset_to_180:
+                } else if (selId == R.id.action_reset_to_180) {
                         photo.setRotationTo(180);
                         return true;
-                    case R.id.action_reset_to_270:
+                } else if (selId == R.id.action_reset_to_270) {
                         photo.setRotationTo(270);
                         return true;
                 }

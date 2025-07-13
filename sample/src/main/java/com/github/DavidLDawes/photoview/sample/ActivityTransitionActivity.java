@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-package com.github.chrisbanes.photoview.sample;
+package com.github.DavidLDawes.photoview.sample;
 
 import android.content.Intent;
 import android.os.Build;
@@ -26,12 +26,14 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.DavidLDawes.sample.R;
+
 public class ActivityTransitionActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transition);
+        setContentView(com.github.DavidLDawes.sample.R.layout.activity_transition);
 
         RecyclerView list = findViewById(R.id.list);
         list.setLayoutManager(new GridLayoutManager(this, 2));

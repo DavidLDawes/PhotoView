@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-package com.github.chrisbanes.photoview.sample;
+package com.github.DavidLDawes.photoview.sample;
 
 import android.os.Bundle;
 
@@ -21,7 +21,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 
-import com.github.chrisbanes.photoview.PhotoView;
+import com.github.DavidLDawes.photoview.PhotoView;
+import com.github.DavidLDawes.sample.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
@@ -32,7 +33,7 @@ public class ViewPagerActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_pager);
+        setContentView(com.github.DavidLDawes.sample.R.layout.activity_view_pager);
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(new SamplePagerAdapter());
     }

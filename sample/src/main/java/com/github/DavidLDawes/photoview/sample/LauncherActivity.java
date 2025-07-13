@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-package com.github.chrisbanes.photoview.sample;
+package com.github.DavidLDawes.photoview.sample;
 
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +27,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.github.DavidLDawes.sample.R;
 
 public class LauncherActivity extends AppCompatActivity {
 
@@ -43,7 +45,7 @@ public class LauncherActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_launcher);
+        setContentView(com.github.DavidLDawes.sample.R.layout.activity_launcher);
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.app_name);
         RecyclerView recyclerView = findViewById(R.id.list);

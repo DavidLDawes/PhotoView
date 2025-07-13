@@ -1,4 +1,4 @@
-package com.github.chrisbanes.photoview.sample;
+package com.github.DavidLDawes.photoview.sample;
 
 import android.view.View;
 import android.view.ViewGroup;

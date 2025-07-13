@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-package com.github.chrisbanes.photoview.sample;
+package com.github.DavidLDawes.photoview.sample;
 
 import android.graphics.Matrix;
 import android.graphics.RectF;
@@ -27,10 +27,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.chrisbanes.photoview.OnMatrixChangedListener;
-import com.github.chrisbanes.photoview.OnPhotoTapListener;
-import com.github.chrisbanes.photoview.OnSingleFlingListener;
-import com.github.chrisbanes.photoview.PhotoView;
+import com.github.DavidLDawes.photoview.OnMatrixChangedListener;
+import com.github.DavidLDawes.photoview.OnPhotoTapListener;
+import com.github.DavidLDawes.photoview.OnSingleFlingListener;
+import com.github.DavidLDawes.photoview.PhotoView;
+import com.github.DavidLDawes.sample.R;
 
 import java.util.Random;
 
@@ -54,7 +55,7 @@ public class SimpleSampleActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_simple_sample);
+        setContentView(com.github.DavidLDawes.sample.R.layout.activity_simple_sample);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Simple Sample");
@@ -69,62 +70,53 @@ public class SimpleSampleActivity extends AppCompatActivity {
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.menu_zoom_toggle:
-                        mPhotoView.setZoomable(!mPhotoView.isZoomable());
-                        item.setTitle(mPhotoView.isZoomable() ? R.string.menu_zoom_disable : R.string.menu_zoom_enable);
-                        return true;
+                int thisId = item.getItemId();
+                if (thisId == R.id.menu_zoom_toggle) {
+                    mPhotoView.setZoomable(!mPhotoView.isZoomable());
+                    item.setTitle(mPhotoView.isZoomable() ? R.string.menu_zoom_disable : R.string.menu_zoom_enable);
+                    return true;
+                } else if (thisId == R.id.menu_scale_fit_center) {
+                    mPhotoView.setScaleType(ImageView.ScaleType.CENTER);
+                    return true;
+                } else if (thisId == R.id.menu_scale_fit_start) {
+                    mPhotoView.setScaleType(ImageView.ScaleType.FIT_START);
+                    return true;
+                } else if (thisId == R.id.menu_scale_fit_end) {
+                    mPhotoView.setScaleType(ImageView.ScaleType.FIT_END);
+                    return true;
+                } else if (thisId == R.id.menu_scale_fit_xy) {
+                    mPhotoView.setScaleType(ImageView.ScaleType.FIT_XY);
+                    return true;
+                } else if (thisId == R.id.menu_scale_scale_center) {
+                    mPhotoView.setScaleType(ImageView.ScaleType.CENTER);
+                    return true;
+                }  else if (thisId == R.id.menu_scale_scale_center_crop) {
+                    mPhotoView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                    return true;
+                } else if (thisId == R.id.menu_scale_scale_center_inside) {
+                    mPhotoView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                    return true;
+                } else if (thisId == R.id.menu_scale_random_animate || thisId == R.id.menu_scale_random) {
+                    Random r = new Random();
 
-                    case R.id.menu_scale_fit_center:
-                        mPhotoView.setScaleType(ImageView.ScaleType.CENTER);
-                        return true;
+                    float minScale = mPhotoView.getMinimumScale();
+                    float maxScale = mPhotoView.getMaximumScale();
+                    float randomScale = minScale + (r.nextFloat() * (maxScale - minScale));
+                    mPhotoView.setScale(randomScale, item.getItemId() == R.id.menu_scale_random_animate);
 
-                    case R.id.menu_scale_fit_start:
-                        mPhotoView.setScaleType(ImageView.ScaleType.FIT_START);
-                        return true;
+                    showToast(String.format(SCALE_TOAST_STRING, randomScale));
 
-                    case R.id.menu_scale_fit_end:
-                        mPhotoView.setScaleType(ImageView.ScaleType.FIT_END);
-                        return true;
-
-                    case R.id.menu_scale_fit_xy:
-                        mPhotoView.setScaleType(ImageView.ScaleType.FIT_XY);
-                        return true;
-
-                    case R.id.menu_scale_scale_center:
-                        mPhotoView.setScaleType(ImageView.ScaleType.CENTER);
-                        return true;
-
-                    case R.id.menu_scale_scale_center_crop:
-                        mPhotoView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                        return true;
-
-                    case R.id.menu_scale_scale_center_inside:
-                        mPhotoView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-                        return true;
-
-                    case R.id.menu_scale_random_animate:
-                    case R.id.menu_scale_random:
-                        Random r = new Random();
-
-                        float minScale = mPhotoView.getMinimumScale();
-                        float maxScale = mPhotoView.getMaximumScale();
-                        float randomScale = minScale + (r.nextFloat() * (maxScale - minScale));
-                        mPhotoView.setScale(randomScale, item.getItemId() == R.id.menu_scale_random_animate);
-
-                        showToast(String.format(SCALE_TOAST_STRING, randomScale));
-
-                        return true;
-                    case R.id.menu_matrix_restore:
-                        if (mCurrentDisplayMatrix == null)
-                            showToast("You need to capture display matrix first");
-                        else
-                            mPhotoView.setDisplayMatrix(mCurrentDisplayMatrix);
-                        return true;
-                    case R.id.menu_matrix_capture:
-                        mCurrentDisplayMatrix = new Matrix();
-                        mPhotoView.getDisplayMatrix(mCurrentDisplayMatrix);
-                        return true;
+                    return true;
+                } else if (thisId == R.id.menu_matrix_restore) {
+                    if (mCurrentDisplayMatrix == null)
+                        showToast("You need to capture display matrix first");
+                    else
+                        mPhotoView.setDisplayMatrix(mCurrentDisplayMatrix);
+                    return true;
+                } else if (thisId == R.id.menu_matrix_capture) {
+                    mCurrentDisplayMatrix = new Matrix();
+                    mPhotoView.getDisplayMatrix(mCurrentDisplayMatrix);
+                    return true;
                 }
                 return false;
             }

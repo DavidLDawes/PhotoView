@@ -1,4 +1,4 @@
-package com.github.chrisbanes.photoview.sample;
+package com.github.DavidLDawes.photoview.sample;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -6,8 +6,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.github.chrisbanes.photoview.OnPhotoTapListener;
-import com.github.chrisbanes.photoview.PhotoView;
+import com.github.DavidLDawes.photoview.OnPhotoTapListener;
+import com.github.DavidLDawes.photoview.PhotoView;
+import com.github.DavidLDawes.sample.R;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.Nullable;
@@ -26,7 +27,7 @@ public class ImmersiveActivity extends AppCompatActivity {
         setContentView(R.layout.activity_immersive);
 
         PhotoView photoView = findViewById(R.id.photo_view);
-        Picasso.with(this)
+        Picasso.get()
                 .load("http://pbs.twimg.com/media/Bist9mvIYAAeAyQ.jpg")
                 .into(photoView);
         photoView.setOnPhotoTapListener(new OnPhotoTapListener() {

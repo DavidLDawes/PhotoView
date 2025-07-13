@@ -2,27 +2,29 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 
 android {
+    namespace "com.github.DavidLDawes"
     compileSdkVersion rootProject.ext.sdkVersion
 
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.sdkVersion
-        versionCode 1
-        versionName "1.0"
+    }
+    buildToolsVersion '36.0.0'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 }
 
 dependencies {
-    implementation "androidx.appcompat:appcompat:1.1.0"
+    implementation 'com.android.support:appcompat-v7:28.0.0'
 }
 
 afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                from components.release
-
-                group = 'com.github.chrisbanes'
+                group = 'com.github.DavidLDawes'
                 artifactId = 'PhotoView'
                 version = '2.3.0'
 
@@ -33,7 +35,7 @@ afterEvaluate {
                 pom {
                     name = 'PhotoView'
                     description = 'A simple ImageView that support zooming, both by Multi-touch gestures and double-tap.'
-                    url = 'https://github.com/Baseflow/PhotoView'
+                    url = 'https://github.com/DavidLDawes/PhotoView'
                     licenses {
                         license {
                             name = 'The Apache License, Version 2.0'
@@ -42,13 +44,13 @@ afterEvaluate {
                     }
                     developers {
                         developer {
-                            id = 'chrisbanes'
-                            name = 'Chris Banes'
+                            id = 'DavidLDawes'
+                            name = 'David L. Dawes'
                         }
                     }
                     scm {
-                        connection = 'scm:git@github.com/chrisbanes/PhotoView.git'
-                        developerConnection = 'scm:git@github.com/chrisbanes/PhotoView.git'
+                        connection = 'scm:git@github.com/DavidLDawes/PhotoView.git'
+                        developerConnection = 'scm:git@github.com/DavidLDawes/PhotoView.git'
                         url = 'https://github.com/chrisbanes/PhotoView'
                     }
                 }
@@ -75,5 +77,5 @@ task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
 
 task sourceJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
-    classifier "sources"
+    archiveClassifier.set("sources")
 }

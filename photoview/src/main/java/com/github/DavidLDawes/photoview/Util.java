@@ -1,4 +1,4 @@
-package com.github.chrisbanes.photoview;
+package com.github.DavidLDawes.photoview;
 
 import android.view.MotionEvent;
 import android.widget.ImageView;
