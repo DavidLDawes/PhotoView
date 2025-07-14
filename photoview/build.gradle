@@ -51,7 +51,7 @@ afterEvaluate {
                     scm {
                         connection = 'scm:git@github.com/DavidLDawes/PhotoView.git'
                         developerConnection = 'scm:git@github.com/DavidLDawes/PhotoView.git'
-                        url = 'https://github.com/chrisbanes/PhotoView'
+                        url = 'https://github.com/DavidLDawes/PhotoView'
                     }
                 }
             }
@@ -59,10 +59,10 @@ afterEvaluate {
     }
 }
 
-task androidJavadocs(type: Javadoc) {
+tasks.register('androidJavadocs', Javadoc) {
     source = android.sourceSets.main.java.srcDirs
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    android.libraryVariants.all { variant ->
+    android.libraryVariants.configureEach { variant ->
         if (variant.name == 'release') {
             owner.classpath += variant.javaCompileProvider.get().classpath
         }
@@ -70,12 +70,13 @@ task androidJavadocs(type: Javadoc) {
     exclude '**/R.html', '**/R.*.html', '**/index.html'
 }
 
-task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+tasks.register('androidJavadocsJar', Jar) {
+    dependsOn androidJavadocs
     archiveClassifier.set('javadoc')
     from androidJavadocs.destinationDir
 }
 
-task sourceJar(type: Jar) {
+tasks.register('sourceJar', Jar) {
     from android.sourceSets.main.java.srcDirs
     archiveClassifier.set("sources")
 }
