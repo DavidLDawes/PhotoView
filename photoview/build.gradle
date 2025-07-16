@@ -10,22 +10,23 @@ android {
         targetSdkVersion rootProject.ext.sdkVersion
     }
     buildToolsVersion '36.0.0'
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
-    }
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'androidx.appcompat:appcompat:1.7.1'
+}
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
 
 afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                group = 'com.github.DavidLDawes'
-                artifactId = 'PhotoView'
+                group = 'io.jitpack'
+                artifactId = 'library'
                 version = '2.3.0'
 
                 // Adds javadocs and sources as separate jars.
@@ -51,7 +52,7 @@ afterEvaluate {
                     scm {
                         connection = 'scm:git@github.com/DavidLDawes/PhotoView.git'
                         developerConnection = 'scm:git@github.com/DavidLDawes/PhotoView.git'
-                        url = 'https://github.com/chrisbanes/PhotoView'
+                        url = 'https://github.com/DavidLDawes/PhotoView'
                     }
                 }
             }
@@ -59,10 +60,10 @@ afterEvaluate {
     }
 }
 
-task androidJavadocs(type: Javadoc) {
+tasks.register('androidJavadocs', Javadoc) {
     source = android.sourceSets.main.java.srcDirs
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    android.libraryVariants.all { variant ->
+    android.libraryVariants.configureEach { variant ->
         if (variant.name == 'release') {
             owner.classpath += variant.javaCompileProvider.get().classpath
         }
@@ -70,12 +71,13 @@ task androidJavadocs(type: Javadoc) {
     exclude '**/R.html', '**/R.*.html', '**/index.html'
 }
 
-task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+tasks.register('androidJavadocsJar', Jar) {
+    dependsOn androidJavadocs
     archiveClassifier.set('javadoc')
     from androidJavadocs.destinationDir
 }
 
-task sourceJar(type: Jar) {
+tasks.register('sourceJar', Jar) {
     from android.sourceSets.main.java.srcDirs
     archiveClassifier.set("sources")
 }
