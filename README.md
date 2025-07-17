@@ -1,6 +1,8 @@
 # PhotoView
 PhotoView aims to help produce an easily usable implementation of a zooming Android ImageView.
 
+[![](https://jitci.com/gh/DavidLDawes/PhotoView/svg)](https://jitci.com/gh/DavidLDawes/PhotoView)
+
 [![](https://jitpack.io/v/DavidLDawes/PhotoView.svg)](https://jitpack.io/#DavidLDawes/PhotoView)
 
 [![](https://user-images.githubusercontent.com/12352397/85141529-94648e80-b24f-11ea-9a14-a845fb43b181.gif)
@@ -45,9 +47,12 @@ There is a [sample](https://github.com/DavidLDawes/PhotoView/tree/master/sample)
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>
 ```
+
 ```java
-PhotoView photoView = (PhotoView) findViewById(R.id.photo_view);
-photoView.setImageResource(R.drawable.image);
+public static void main(String[] args) {
+    PhotoView photoView = (PhotoView) findViewById(R.id.photo_view);
+    photoView.setImageResource(R.drawable.image);
+}
 ```
 That's it!
 
