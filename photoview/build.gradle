@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 
@@ -10,6 +12,12 @@ android {
         targetSdkVersion rootProject.ext.sdkVersion
     }
     buildToolsVersion '36.0.0'
+}
+
+tasks.withType(KotlinCompile).configureEach {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
