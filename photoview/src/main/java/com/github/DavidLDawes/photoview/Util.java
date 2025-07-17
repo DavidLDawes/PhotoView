@@ -1,5 +1,7 @@
 package com.github.DavidLDawes.photoview;
 
+import static android.widget.ImageView.ScaleType.MATRIX;
+
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
@@ -24,8 +26,7 @@ class Util {
         if (scaleType == null) {
             return false;
         }
-        switch (scaleType) {
-            case MATRIX:
+        if (scaleType == MATRIX) {
                 throw new IllegalStateException("Matrix scale type is not supported");
         }
         return true;
