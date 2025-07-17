@@ -50,3 +50,9 @@ dependencies {
 
     implementation project(":photoview")
 }
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
